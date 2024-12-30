@@ -92,6 +92,10 @@ SRC_URI:append:jetson-tx2-nx-devkit = " \
     file://tegra186-p3636-0001-p3509-0000-a01-auvidea-jn30d.dtb \
 "
 
+SRC_URI:append:cti-rogue-xavier = " \
+    file://tegra194-agx-cti-AGX101.dtb \
+"
+
 TEGRA_INITRAMFS_INITRD = "0"
 
 BALENA_CONFIGS:remove:astro-tx2 = " mdraid"
@@ -391,3 +395,6 @@ do_deploy:append:astro-tx2() {
     cp ${WORKDIR}/tegra186-tx2-cti-ASG001-revG+.dtb "${DEPLOYDIR}"
 }
 
+do_deploy:append:cti-rogue-xavier() {
+    cp ${WORKDIR}/tegra194-agx-cti-AGX101.dtb "${DEPLOYDIR}"
+}

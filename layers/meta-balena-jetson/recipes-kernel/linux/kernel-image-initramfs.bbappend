@@ -21,3 +21,6 @@ do_install:append() {
         rm ${D}/boot/Image || true
 }
 
+do_install:append:cti-rogue-xavier() {
+    echo "" > ${D}/boot/${type}
+}

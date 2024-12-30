@@ -24,6 +24,7 @@ DTBFILE:photon-xavier-nx = "tegra194-xavier-nx-cti-NGX003.dtb"
 DTBFILE:cnx100-xavier-nx = "tegra194-xavier-nx-cnx100.dtb"
 DTBNAME:jetson-xavier="tegra194-p2888-0001-p2822-0000"
 DTBNAME:jetson-xavier-nx-devkit-seeed-2mic-hat="tegra194-p3668-all-p3509-0000-seeed-2mic-hat"
+DTBNAME:cti-rogue-xavier="tegra194-agx-cti-AGX101"
 
 BALENA_BOOT_PARTITION_FILES:append = " \
     dispatcher.d/50-sample-script:/dispatcher.d/50-sample-script \
