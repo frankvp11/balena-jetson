@@ -26,10 +26,13 @@ SRC_URI = " \
     file://${BOOT_BLOB};unpack=0 \
     file://cti-rogue-32-4-3-pinmux.cfg \
 "
-PINMUXCFG = "cti-rogue-32-4-3-pinmux.cfg"
+
 # PINMUXCFG = "tegra19x-mb1-pinmux-p2888-0000-a04-p2822-0000-b01.cfg"
+# PINMUXCFG_cti_rogue_xavier = "cti-rogue-32-4-3-pinmux.cfg"
+PINMUXCFG = "cti-rogue-32-4-3-pinmux.cfg"
 LNXSIZE ?= "67108864"
 # DTBNAME = "tegra194-p2888-0001-p2822-0000"
+# DTBNAME_cti-rogue-xavier = "tegra194-agx-cti-AGX101"
 DTBNAME = "tegra194-agx-cti-AGX101"
 KERNEL_DEVICETREE = "${DEPLOY_DIR_IMAGE}/${DTBNAME}.dtb"
 DTBFILE ?= "${@os.path.basename(d.getVar('KERNEL_DEVICETREE', True).split()[0])}"
@@ -178,6 +181,7 @@ do_configure() {
 
     # prepare flash.xml.in to be used in signing
     cp ${WORKDIR}/resinOS-flash194.xml flash.xml.in
+    cp ${WORKDIR}/cti-rogue-32-4-3-pinmux.cfg .
     sed -i "s, DTB_NAME, ${DTBFILE},g" flash.xml.in
 
     sed -i -e "s/\[DTB_NAME\]/$(echo ${DTBFILE} | cut -d '.' -f 1)/g" ${WORKDIR}/partition_specification194.txt
@@ -210,7 +214,6 @@ do_configure() {
     cp ${LNXFILE} ${DEPLOY_DIR_IMAGE}/bootfiles/Image
     cp -r ${DTBNAME}-root*.dtb ${DEPLOY_DIR_IMAGE}/bootfiles/
     cp ${WORKDIR}/resinOS-flash194.xml ${DEPLOY_DIR_IMAGE}/bootfiles/flash.xml
-    cp ${WORKDIR}/cti-rogue-32-4-3-pinmux.cfg .
     cp -r signed/* ${DEPLOY_DIR_IMAGE}/bootfiles/
     cp -r ${DTBNAME}-root*_sigheader.dtb.encrypt ${DEPLOY_DIR_IMAGE}/bootfiles/
     dd if=/dev/zero of="${DEPLOY_DIR_IMAGE}/bootfiles/bmp.blob" bs=1K count=1
